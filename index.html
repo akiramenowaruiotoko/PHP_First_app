@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Store</title>
+    <style>
+        /* ----------------------- Browser Default Initialization */  
+        html {  
+            overflow-y: scroll;  
+        }  
+        body, div, dl, dt, dd, ul, ol, li, h1, h2, h2, h3, h5, h6,  
+        pre, form, fieldset, input, textarea, p, blockquote, th, td {  
+            margin: 0;  padding: 0;  
+        }  
+        .main{
+            margin: 5px 10%;
+        }
+    </style>
+</head>
+<body>
+    <!-- db -->
+    <?php include("./molecules/db.php"); ?>
+    <!-- header -->
+    <div class="header" >
+        <?php include("./molecules/p_header.php"); ?>
+    </div>
+    <!-- main -->
+    <div class="main">
+        <!--page switching-->
+        <?php
+            session_start();
+            if($_POST['cart']){
+                include("./organisms/cart.html");
+            } elseif ($_POST['purchase']){
+                //reset variable
+                $_SESSION["cart"] = [];
+                include("./organisms/purchase.html");
+            } elseif ($_POST['empty_cart']){
+                //reset variable
+                $_SESSION["cart"] = [];
+                include("./organisms/menu.html");
+            } else {
+                include("./organisms/menu.html");
+            }
+        ?> 
+    </div>
+        <!-- footer -->
+    <div class="footer">
+        <?php include("./molecules/p_footer.php"); ?>
+    </div>
+</body>
+</html>
+
